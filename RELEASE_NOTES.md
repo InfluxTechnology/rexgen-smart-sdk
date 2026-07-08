@@ -67,7 +67,7 @@ This describes the `influx-6.6.23` platform baseline the SDK currently wraps (so
 
 ### Known Limitations
 
-- No dedicated SDK version tag yet — this baseline is tracked at the `influx-yocto-base` branch level (`influx-6.6.23`), not as a separate SDK release artifact
+- No dedicated SDK version tag yet — this baseline is tracked via the manifest files under [`manifest/`](manifest/README.md) (mirrored from `influx-yocto-base`'s `influx-6.6.23` branch), not as a separate SDK release artifact
 - Public API/wrapper boundary for Rexgen Core interfaces is still being documented (see [README.md](README.md#hardware-interfaces))
 - `populate_sdk` (application SDK / cross-toolchain) output has not yet been published as a standalone downloadable artifact — build it locally per [docs/getting-started.md](docs/getting-started.md#building-the-application-sdk)
 

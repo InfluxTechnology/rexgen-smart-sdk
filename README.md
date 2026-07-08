@@ -116,7 +116,14 @@ The baseline machine and image target for Rexgen Smart:
 
 ## Repository Access
 
-`influx-yocto-base` and the layers it references (`meta-influx`, `meta-mender`, `meta-mender-community`, `meta-murata-wireless`, and the upstream `poky`/`meta-openembedded`/`meta-imx` projects) are **public** repositories. No GitHub token or account is required to `repo init` / `repo sync` the SDK baseline.
+This repository carries its own `repo` manifest files under [`manifest/`](manifest/README.md), so `repo init`/`repo sync` can be run directly against `rexgen-smart-sdk` — no separate visit to `influx-yocto-base` is required:
+
+```bash
+repo init -u https://github.com/InfluxTechnology/rexgen-smart-sdk -b main -m manifest/base.xml
+repo sync
+```
+
+Every layer the manifest references (`meta-influx`, `meta-mender`, `meta-mender-community`, `meta-murata-wireless`, and the upstream `poky`/`meta-openembedded`/`meta-imx` projects) is a **public** repository. No GitHub token or account is required.
 
 A GitHub account/token is only needed if you work against a private fork or a private downstream repository of your own — in that case, use your own personal access token, never a token committed to shared documentation.
 
@@ -169,6 +176,7 @@ This is currently an in-progress SDK baseline built on top of the existing Yocto
 
 The SDK baseline currently includes the following documents:
 
+- `manifest/README.md`
 - `docs/overview.md`
 - `docs/host-setup.md`
 - `docs/hardware-architecture.md`

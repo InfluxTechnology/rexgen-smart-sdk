@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <include name="common.xml"/> 
+
+  <project remote="inf" name="meta-influx" path="sources/meta-influx" revision="influx-6.6.23-base" >
+     <copyfile src="influx-setup-sdk.sh" dest="influx-setup-default.sh"/> 
+  </project>
+  
+  <remote fetch="https://github.com/mendersoftware" name="mender"/>
+  
+  <project name="meta-mender" remote="mender" revision="scarthgap" path="sources/meta-mender"/>
+  <project name="meta-mender-community" remote="mender" revision="scarthgap" path="sources/meta-mender-community"/>
+
+  <project remote="inf" name="meta-influx-mender" path="sources/meta-influx-mender" revision="inf-6.6.23" >
+     <linkfile src="scripts/influx-setup-mender.sh" dest="influx-setup-release.sh"/>
+  </project> 
+
+</manifest>

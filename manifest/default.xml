@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <include name="common.xml"/> 
+  
+  <project remote="inf" name="meta-influx" path="sources/meta-influx" revision="influx-6.6.23" > 
+     <copyfile src="influx-setup-default.sh" dest="influx-setup-release.sh"/>
+  </project> 
+
+</manifest>

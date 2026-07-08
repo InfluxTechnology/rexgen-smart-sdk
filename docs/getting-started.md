@@ -26,7 +26,7 @@ Baseline:
 
 ## Source Setup
 
-`influx-yocto-base` and every layer it references (`meta-influx`, `meta-mender`, `meta-mender-community`, `meta-murata-wireless`, plus upstream `poky` / `meta-openembedded` / `meta-imx` / etc.) are **public repositories**. No GitHub account or token is required to sync the SDK baseline.
+This SDK repository (`rexgen-smart-sdk`) carries its own copy of the `repo` manifest files under [`manifest/`](../manifest/README.md), so it is the single entry point for both documentation and source sync — you don't need to visit `influx-yocto-base` directly. Every layer referenced by the manifest (`meta-influx`, `meta-mender`, `meta-mender-community`, `meta-murata-wireless`, plus upstream `poky` / `meta-openembedded` / `meta-imx` / etc.) is a **public repository**. No GitHub account or token is required to sync the SDK baseline.
 
 Install `repo` and initialize the manifest:
 
@@ -40,11 +40,11 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
 mkdir build && cd build
-repo init -u https://github.com/InfluxTechnology/influx-yocto-base -b influx-6.6.23 -m base.xml
+repo init -u https://github.com/InfluxTechnology/rexgen-smart-sdk -b main -m manifest/base.xml
 repo sync
 ```
 
-`base.xml` includes the Mender OTA update layers and the release toolchain setup script. Other manifest profiles (`common.xml`, `default.xml`, `mender.xml`, `single.xml`) select different layer/feature combinations — use `base.xml` for the SDK baseline unless you have a reason to pick another one.
+`manifest/base.xml` includes the Mender OTA update layers and the release toolchain setup script. Other manifest profiles (`manifest/common.xml`, `manifest/default.xml`, `manifest/mender.xml`, `manifest/single.xml`) select different layer/feature combinations — use `base.xml` for the SDK baseline unless you have a reason to pick another one. See [manifest/README.md](../manifest/README.md) for what each profile includes.
 
 You only need a GitHub token/`.netrc` entry if you are syncing from your **own private fork**. In that case, never commit a real token or personal account to shared documentation — use a placeholder like below and keep the real credentials local to your machine:
 
@@ -56,7 +56,7 @@ password your-personal-access-token
 
 ## Build Environment Initialization
 
-The `influx-yocto-base` machine/distro baseline for Rexgen Smart is:
+The machine/distro baseline for Rexgen Smart (pinned in `manifest/`) is:
 
 ```bash
 MACHINE=imx8mm-smart
