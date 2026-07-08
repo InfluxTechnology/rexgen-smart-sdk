@@ -1,0 +1,80 @@
+# Rexgen Smart SDK Overview
+
+## Purpose
+
+`Rexgen Smart SDK` is the official development package for building Linux-side software on Rexgen Smart devices.
+
+The SDK is built around the existing Yocto-based platform flow and is intended to provide a clear, documented and repeatable way to:
+
+- build supported Rexgen Smart Linux images
+- flash supported hardware
+- validate platform bring-up
+- run official examples
+- develop Linux-side applications on the i.MX8 host
+
+## Who This SDK Is For
+
+The SDK is intended for:
+
+- internal application developers
+- integration engineers
+- validation engineers
+- approved OEM and partner teams
+
+It is intended for users who need to work on software running on the Linux host side of Rexgen Smart.
+
+## What The SDK Includes
+
+The first SDK baseline is expected to include:
+
+- documented Yocto-based build flow
+- supported image build path
+- flashing guidance
+- architecture documentation
+- release notes and support scope
+- official SDK examples
+
+As the SDK evolves, additional tooling, examples and release artifacts can be added without changing the basic developer entry flow.
+
+## What The SDK Does Not Try To Be
+
+This SDK is not intended to be:
+
+- a generic Linux distribution for arbitrary hardware
+- a firmware SDK for Rexgen Standalone
+- a support promise for undocumented internal interfaces
+- a replacement for all lower-level BSP engineering work
+
+## Scope
+
+Supported scope:
+
+- Linux-side development on Rexgen Smart
+- documented and validated build and flashing flow
+- supported hardware revisions listed in release documentation
+- official branch and release combinations defined by the SDK release
+
+Out-of-scope:
+
+- unsupported board variants
+- undocumented custom forks
+- unsupported platform modifications
+- Rexgen Standalone firmware workflows
+
+## Relationship To The Existing Yocto Base
+
+The SDK uses the current Yocto-based project as its platform foundation.
+
+That means:
+
+- the build system remains Yocto-based
+- platform integration remains centered around the current BSP stack
+- documentation and developer usability are improved without requiring a major repository redesign
+
+This approach allows the team to create a credible first SDK release with minimal structural change.
+
+## Success Criteria
+
+The SDK baseline should make the following statement true:
+
+> A developer can follow the documented flow, build a supported image, flash a supported Rexgen Smart device, boot it successfully and start from an official example without relying on internal tribal knowledge.
