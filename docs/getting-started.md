@@ -139,13 +139,13 @@ Minimum post-flash validation checklist:
 
 ## Running An Example
 
-The first example should be small, deterministic and easy to validate.
+**Status: not started.** There is no `examples/` directory in this repository yet — this is the single biggest gap between the current documentation baseline and a complete SDK. Until it exists, use the [Hardware Interfaces](#hardware-interfaces) commands below directly on a booted device as a manual smoke test.
 
-The ideal first example is:
+When the first official example is added, it should be:
 
-- easy to build
-- easy to run
-- clearly connected to the platform value of Rexgen Smart
+- small and deterministic (e.g. a `candump`/`cansend` round-trip, or a `gpioset`/`gpioget` toggle) so it's easy to validate pass/fail
+- buildable with the application SDK from [Building The Application SDK](#building-the-application-sdk) above, not just runnable from the base image
+- clearly connected to a platform capability unique to Rexgen Smart (CAN, GPIO, GNSS, or the Rexgen Core socket interface), not a generic "hello world"
 
 ## Hardware Interfaces
 

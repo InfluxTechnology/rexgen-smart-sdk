@@ -36,20 +36,24 @@ Typical options include:
 
 This is especially useful when the SDK needs a more controlled host tool baseline.
 
-## Minimum Practical Recommendations
+## Disk Space And RAM
 
-The Yocto documentation gives a minimum baseline, but for practical Rexgen Smart work the host machine should also have:
+Official Yocto Project `5.0.6` (`Scarthgap`) minimums, quoted from the system requirements documentation:
 
-- enough free disk space for full image builds
-- enough RAM for repeatable builds
-- stable network connectivity for repository sync
+- disk space: **at least 90 GB free** (quoted for `core-image-sato` on `qemux86-64`; a comparable-complexity image)
+- RAM: **at least 8 GB**, with 4 CPU cores (builds succeed but are slow at this minimum)
 
-The final SDK release should publish a project-specific recommendation for:
+`influx-image-base` is a comparable-or-larger image than `core-image-sato` (it adds Qt6, Wayland, Bluetooth, wireless firmware/drivers and the Mender OTA stack on top of the base Yocto set), so treat 90 GB/8 GB as a hard floor, not a comfortable target. Practical recommendation for repeated/parallel builds:
 
-- minimum free disk space
-- recommended disk space
-- minimum RAM
-- recommended RAM
+| | Minimum (Yocto floor) | Recommended for this project |
+|---|---|---|
+| Free disk space | 90 GB | 200 GB+ (sstate-cache and `downloads/` grow fast across rebuilds) |
+| RAM | 8 GB | 16 GB+ |
+| CPU cores | 4 | as many as available — build parallelism scales directly with `BB_NUMBER_THREADS`/`PARALLEL_MAKE` |
+
+Stable network connectivity is also required for the initial `repo sync` (it fetches every layer in `manifest/`) and for any `bitbake` fetch tasks that aren't already in `downloads/` or `sstate-cache`.
+
+A full from-scratch `influx-image-base` build has not been benchmarked and published for a reference host yet — if you time one, add the wall-clock time and host spec here for future readers.
 
 ## Locale
 

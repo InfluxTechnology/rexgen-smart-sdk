@@ -62,7 +62,7 @@ Before flashing a device, you need:
 - Flashing overwrites all existing data on the device's storage — back up anything you need first.
 - Only flash an image built for `imx8mm-smart`; images built for other machines will not boot and may leave the board in an inconsistent state.
 - Do not disconnect power or the USB cable while UUU is running.
-- Development images (with debug users/services enabled) should not be deployed to production-like or customer-facing environments.
+- The baseline `influx-image-base` build currently ships debug credentials by default (passwordless `tester` user, hardcoded `root` password, SSH enabled) — see [SECURITY.md](../SECURITY.md#current-credential-posture-influx-image-base). Do not flash an unmodified build of this image to a production-like, customer-facing, or otherwise untrusted-network device.
 
 ## Post-Flash Validation
 

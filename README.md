@@ -75,15 +75,19 @@ This SDK is focused on `Rexgen Smart` and on Linux-side development running on t
 
 ## Current Scope
 
-This README is the baseline SDK entry page. It will be expanded as the following areas are completed:
+Status of each SDK area:
 
-- architecture documentation
-- getting started flow
-- flashing guide
-- examples
-- release notes
-- supported hardware list
-- support and security policies
+| Area | Status |
+|---|---|
+| Architecture documentation | Done — [docs/hardware-architecture.md](docs/hardware-architecture.md) |
+| Getting started flow | Done — [docs/getting-started.md](docs/getting-started.md) |
+| Manifest / source sync | Done — [manifest/](manifest/README.md) |
+| Flashing guide | Done — [docs/flashing.md](docs/flashing.md) |
+| Supported hardware list | Done — `imx8mm-smart` only, see [SUPPORT.md](SUPPORT.md) |
+| Support and security policies | Done, pending a real security-contact address — see [SECURITY.md](SECURITY.md) |
+| Release notes | Done for the platform baseline; no SDK-specific tag cut yet — see [RELEASE_NOTES.md](RELEASE_NOTES.md) |
+| Formal EULA/license text | Interim short-form notice only, pending legal review — see [EULA.md](EULA.md) |
+| Official SDK examples | **Not started** — no `examples/` directory exists yet in this repo |
 
 ## Getting Started
 
@@ -170,11 +174,9 @@ Exact API/wrapper boundaries for the Rexgen Core interfaces are tracked separate
 
 ## Repository Status
 
-This is currently an in-progress SDK baseline built on top of the existing Yocto platform flow. The repository content and documentation will be refined incrementally as each SDK requirement is completed and validated.
+The documentation baseline (build flow, manifest sync, flashing, application SDK, hardware interfaces) is complete and usable end-to-end. Remaining known gaps before calling this a finished v1.0 SDK: official runnable examples, a real security-contact address, and formal legal review of the EULA — see the table in [Current Scope](#current-scope).
 
 ## Documentation
-
-The SDK baseline currently includes the following documents:
 
 - `manifest/README.md`
 - `docs/overview.md`
@@ -188,17 +190,9 @@ The SDK baseline currently includes the following documents:
 - `SECURITY.md`
 - `EULA.md`
 
-These documents form the first documentation layer and will be expanded with validated project-specific details as the SDK work continues.
-
 ## Development Direction
 
-The current approach is to evolve the existing Yocto-based project into a usable first SDK release with minimal structural changes. The focus is on:
-
-- clearer developer onboarding
-- better documentation
-- safer release defaults
-- official examples
-- release hygiene
+The current approach is to evolve the existing Yocto-based project into a usable first SDK release with minimal structural changes. Done: developer onboarding, build/flash/application-SDK documentation, release hygiene (manifest mirroring, versioning model). Remaining: official examples, safer release defaults (see [SECURITY.md](SECURITY.md) development-vs-release posture, still to be validated against the actual image).
 
 ## License And Versioning
 

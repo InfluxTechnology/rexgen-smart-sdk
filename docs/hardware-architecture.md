@@ -57,9 +57,9 @@ The SDK does not define or replace all low-level firmware workflows for Rexgen C
 
 ## Relationship To RexgenLibrary
 
-`RexgenLibrary` should be treated as a separate library and tooling asset related to Rexgen Core and Rexgen Standalone workflows.
+`RexgenLibrary` is a separate product: the library and tooling used for Rexgen Core / Rexgen Standalone integration workflows. It is not part of this SDK and is not built or packaged by it.
 
-Where the Smart SDK integrates with Rexgen Core functionality, that relationship should be documented explicitly and kept clear for developers.
+On Rexgen Smart, the i.MX8 Linux host talks to Rexgen Core over the USB link through the platform's own userspace services (`rexgen-core`, `rexgend`) and the socket control ports listed in [Hardware Interfaces](../README.md#hardware-interfaces) — not through RexgenLibrary. If a given integration needs RexgenLibrary specifically (e.g. to reuse Standalone-side logic), that dependency should be called out explicitly wherever it applies; as of this baseline, no part of the documented Smart SDK flow requires it.
 
 ## Architecture Summary
 
