@@ -1,56 +1,41 @@
-# SDK Usage Notice and EULA Draft
+# Rexgen Smart SDK — Usage Notice
 
-## Status
+## Purpose
 
-This is the short-form usage notice for the Rexgen Smart SDK and is the authoritative usage document until a formal legal EULA is published. Treat it as binding for now; it should still be reviewed by the appropriate legal or business owner before a wider (non-partner) release.
-
-## Intended Purpose
-
-The Rexgen Smart SDK is provided for evaluation, development, integration and validation use on supported Rexgen Smart hardware and supported release baselines.
+This notice sets out the terms under which InfluxTechnology makes the Rexgen Smart SDK available. It governs use of this repository, its documentation, the `influx-image-base` build it produces, and any application SDK / cross-toolchain generated from it, on supported Rexgen Smart hardware and supported release baselines (see [Version Baseline](README.md#version-baseline)).
 
 ## Permitted Use
 
-Unless otherwise specified by the final license terms, approved users may use the SDK to:
+Approved users — internal developers, integration engineers, and approved OEM/partner teams — may use the SDK to:
 
-- build supported images
-- evaluate the platform
+- build supported Rexgen Smart Linux images
+- evaluate and validate the platform
 - develop Linux-side software for supported Rexgen Smart systems
 - integrate supported applications and examples
 
 ## Restricted Use
 
-The SDK should not be assumed to grant rights for:
+This notice does not grant rights to:
 
-- unsupported redistribution
-- use outside agreed commercial or partner terms
-- reverse engineering of components where separate licensing terms apply
-- use on unsupported hardware or against undocumented interfaces where support is implied
+- redistribute the SDK or built images outside the documented flow
+- use the SDK outside agreed commercial or partner terms
+- reverse-engineer components that are covered by separate third-party licensing terms
+- use the SDK against unsupported hardware revisions or undocumented internal interfaces as if they were stable, supported APIs
 
 ## No Implied Production Approval
 
-Availability of a development flow, example, image or tool in the SDK does not automatically mean that it is approved for production deployment in all customer scenarios.
+Availability of a development flow, example, image, or tool in this SDK does not by itself mean it is approved for production deployment in every customer scenario. In particular, the default credential posture of `influx-image-base` is a lab/development configuration — see [SECURITY.md](SECURITY.md) before any non-lab deployment.
 
-Production usage, provisioning and security posture should follow the documented release process and any applicable commercial agreement.
+Production usage, provisioning, and security posture follow InfluxTechnology's documented release process and any applicable commercial agreement.
 
 ## Third-Party Components
 
-The SDK may contain or depend on third-party open-source components and platform layers that are governed by their own licenses.
+The SDK depends on third-party open-source components and platform layers pinned in [`manifest/`](manifest/README.md) (Yocto/OpenEmbedded, NXP's `meta-imx`, Mender, and others), each governed by its own upstream license. Using the SDK does not change those upstream license terms; consult each layer's own license for its specific conditions.
 
-The final SDK release should clearly reference:
+## Versioning
 
-- applicable open-source licenses
-- third-party notices where required
-- project-specific usage conditions if any
+Published SDK snapshots are tagged in this repository and released with accompanying release notes — see [License And Versioning](README.md#license-and-versioning) and [RELEASE_NOTES.md](RELEASE_NOTES.md).
 
-## Release And Versioning Expectation
+## Precedence
 
-The final SDK release model should use:
-
-- version tags
-- published releases
-- release notes
-- checksums for published artifacts
-
-## Finalization Note
-
-This file is intentionally brief and should be replaced or approved as part of the first formal SDK release process.
+This notice is the governing usage document for the SDK unless and until InfluxTechnology publishes a separate, formally executed license agreement covering your use — in which case that agreement takes precedence. InfluxTechnology may update this notice between releases; the version distributed with a given SDK release governs that release.

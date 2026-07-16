@@ -2,19 +2,18 @@
 
 ## Scope
 
-This document defines the support boundary for the Rexgen Smart SDK baseline.
-
-The goal is to make it clear what is intended to be supported, what is best-effort and what falls outside the SDK support promise.
+This document defines the support boundary for the Rexgen Smart SDK: what's supported, what's best-effort, and what falls outside the support promise entirely.
 
 ## Supported
 
-The SDK is intended to support:
+The SDK supports:
 
-- the documented build flow
+- the documented build, flashing, and application-SDK flow in this repository
 - hardware: `imx8mm-smart` (Rexgen Smart, i.MX8MM) — the only machine currently defined in `manifest/`
 - branch/stream: `influx-6.6.23` (kernel `6.6.23`, NXP BSP `rel_imx_6.6.36_2.1.0`) — see [Version Baseline](README.md#version-baseline)
-- official SDK examples (once published — see [RELEASE_NOTES.md](RELEASE_NOTES.md) known limitations)
-- documented Linux-side development workflows
+- documented Linux-side development workflows against the interfaces listed in [Hardware Interfaces](README.md#hardware-interfaces)
+
+Official runnable SDK examples are planned but not yet published — see the [Current Scope](README.md#current-scope) table in the main README.
 
 ## Best-Effort Areas
 
@@ -36,13 +35,15 @@ The SDK does not promise support for:
 
 ## Requirements For Supported Use
 
-To stay within supported scope, users should:
+To stay within supported scope:
 
-- use the documented branch or release
-- follow the documented setup and flashing instructions
-- use supported hardware revisions
-- avoid relying on undocumented internal behavior
+- use the documented branch or release (`influx-6.6.23`)
+- follow the documented setup, build, and flashing instructions
+- use supported hardware revisions (`imx8mm-smart`)
+- don't rely on undocumented internal behavior
 
-## Documentation Status
+## Getting Help
 
-This support policy should be refined as the first formal SDK release is prepared and as the supported hardware and release matrix is finalized.
+- **Bugs and questions about this SDK** (documentation, manifest, build/flash flow): open a GitHub issue in this repository.
+- **Security issues**: do not open a public issue — see [SECURITY.md](SECURITY.md) for the reporting contact.
+- **Partner and commercial support**: use your existing InfluxTechnology account/partner contact.

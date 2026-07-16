@@ -2,7 +2,7 @@
 
 `Rexgen Smart SDK` is the official development package for building Linux-side software on Rexgen Smart devices. It provides the documented build flow, platform integration path and example starting points needed to build images, flash devices and develop applications on the i.MX8 Linux host.
 
-This repository is the working SDK entry point that we will expand step by step. The current goal is to provide a clear and usable developer-facing foundation on top of the existing Yocto-based platform flow, with minimal structural changes.
+This repository is the single entry point for Rexgen Smart Linux development: source sync, build, flash, application SDK, and hardware-interface documentation on top of the existing Yocto-based platform flow.
 
 ## What Is Rexgen Smart SDK
 
@@ -39,8 +39,9 @@ Always state both when reporting an issue or describing a build.
 - documented Yocto-based build flow
 - Linux-side software development on the i.MX8 host
 - supported platform integration flows
-- official SDK examples
-- supported hardware, branch and release scope defined by release documentation
+- supported hardware, branch and release scope defined by release documentation (see [SUPPORT.md](SUPPORT.md))
+
+Official runnable SDK examples are planned but not yet published — see [Current Scope](#current-scope).
 
 ## Not Supported
 
@@ -170,7 +171,7 @@ The practical developer value of Rexgen Smart is the platform interfaces exposed
 - **Rexgen Core / IMU data** — exposed through the Rexgen Core integration path (`rexgen-core`, `rexgend`) over the USB link described in [docs/hardware-architecture.md](docs/hardware-architecture.md); live CAN, socket control ports (5051/5053/5054) and datalog upload are part of this path.
 - **Flashing/recovery** — over USB using NXP's UUU tool; see [docs/flashing.md](docs/flashing.md).
 
-Exact API/wrapper boundaries for the Rexgen Core interfaces are tracked separately and will be expanded here as they are documented.
+Exact API/wrapper boundaries for the Rexgen Core interfaces are not yet published as a versioned reference; this section is the current source of truth until a dedicated API reference exists.
 
 ## Repository Status
 

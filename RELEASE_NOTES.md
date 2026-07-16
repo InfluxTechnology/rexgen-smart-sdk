@@ -1,26 +1,12 @@
 # Release Notes
 
-## Current Status
+## Format
 
-This file is the release notes baseline for the first Rexgen Smart SDK release prepared with minimal structural changes on top of the current Yocto-based platform flow.
-
-## Release Template
-
-Each SDK release should record at minimum:
-
-- SDK version
-- release date
-- supported branch
-- supported hardware revisions
-- Linux kernel baseline
-- U-Boot baseline
-- image artifacts included
-- known limitations
-- major fixes or changes
+Each entry below records: SDK version, release date, supported branch and hardware, Linux kernel and U-Boot baseline, included image artifacts, known limitations, and major changes since the previous entry.
 
 ## v1.0 (Underlying Platform Baseline)
 
-This describes the `influx-6.6.23` platform baseline the SDK currently wraps (source: `influx-yocto-base` release notes). SDK-specific packaging on top of this baseline is still to be tagged — see "SDK Packaging" below.
+This entry describes the `influx-6.6.23` platform baseline the SDK currently wraps (source: `influx-yocto-base` release notes). SDK-specific packaging on top of this baseline has not been tagged yet — see [Upcoming](#upcoming) below.
 
 ### Version
 
@@ -72,10 +58,10 @@ This describes the `influx-6.6.23` platform baseline the SDK currently wraps (so
 - `populate_sdk` (application SDK / cross-toolchain) output has not yet been published as a standalone downloadable artifact — build it locally per [docs/getting-started.md](docs/getting-started.md#building-the-application-sdk)
 - **`influx-image-base` ships insecure default credentials (passwordless `tester` user, hardcoded `root` password, SSH enabled by default) — see [SECURITY.md](SECURITY.md#current-credential-posture-influx-image-base) before deploying any built image outside a lab environment**
 
-## SDK Packaging
+## Upcoming
 
-`TBD` — first SDK-specific tag/release (`vX.Y.Z`) covering this repository's documentation and any SDK-only tooling on top of the `influx-6.6.23` baseline above.
+The first SDK-specific tag/release (`vX.Y.Z`) will cover this repository's documentation and any SDK-only tooling layered on top of the `influx-6.6.23` baseline above, per the versioning model in [README.md](README.md#license-and-versioning). This entry will be replaced with the actual tag, date, and changes once that release is cut.
 
 ### Notes
 
-This file should be updated for every published SDK candidate and release, and whenever the underlying `influx-yocto-base` branch/BSP baseline changes.
+This file is updated for every published SDK candidate and release, and whenever the underlying `influx-yocto-base` branch/BSP baseline changes.

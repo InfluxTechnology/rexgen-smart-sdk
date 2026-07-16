@@ -156,7 +156,3 @@ The baseline image ships the userspace tooling to reach the platform interfaces 
 - **GNSS**: onboard GNSS data logging is a documented Rexgen device feature.
 - **Rexgen Core / IMU**: reached through the Rexgen Core integration path (`rexgen-core`, `rexgend`, `wlan-manager`) over the USB link — see [hardware-architecture.md](hardware-architecture.md). Live CAN, socket control ports (5051/5053/5054) and datalog upload to cloud storage are part of this path.
 - **Flashing and recovery**: see [flashing.md](flashing.md).
-
-## Release Readiness Note
-
-This document should only be called complete once a developer can follow it from a clean environment without requiring additional oral instructions.
