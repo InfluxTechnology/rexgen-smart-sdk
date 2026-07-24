@@ -12,8 +12,7 @@ The SDK supports:
 - hardware: `imx8mm-smart` (Rexgen Smart, i.MX8MM) — the only machine currently defined in `manifest/`
 - branch/stream: `influx-6.6.23` (kernel `6.6.23`, NXP BSP `rel_imx_6.6.36_2.1.0`) — see [Version Baseline](README.md#version-baseline)
 - documented Linux-side development workflows against the interfaces listed in [Hardware Interfaces](README.md#hardware-interfaces)
-
-Official runnable SDK examples are planned but not yet published — see the [Current Scope](README.md#current-scope) table in the main README.
+- official SDK examples — see [examples/](examples/README.md) (CAN, IMU/ADC/Digital channels, GNSS)
 
 ## Best-Effort Areas
 

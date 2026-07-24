@@ -31,7 +31,7 @@ It is intended for users who need to work on software running on the Linux host 
 - architecture documentation
 - release notes and support scope
 
-Official SDK examples are planned but not yet published — see [Current Scope](../README.md#current-scope) in the main README. Additional tooling, examples, and release artifacts will be added without changing this basic developer entry flow.
+Official SDK examples are published under [examples/](../examples/README.md) (CAN, IMU/ADC/Digital channels, GNSS). Additional tooling, examples, and release artifacts will be added without changing this basic developer entry flow.
 
 ## What The SDK Does Not Try To Be
 
@@ -68,4 +68,4 @@ The SDK uses the current Yocto-based project (`influx-yocto-base`) as its platfo
 
 ## Success Criterion
 
-A developer can follow the documented flow in [getting-started.md](getting-started.md), build a supported image, flash a supported Rexgen Smart device, boot it successfully, and reach the platform's hardware interfaces (CAN, GPIO, GNSS, Rexgen Core) — without relying on internal tribal knowledge. The one part of this not yet true end-to-end is "start from an official example," since no `examples/` directory has been published yet.
+A developer can follow the documented flow in [getting-started.md](getting-started.md), build a supported image, flash a supported Rexgen Smart device, boot it successfully, and follow an [official example](../examples/README.md) (CAN, IMU/ADC/Digital, GNSS) to confirm the platform's hardware interfaces are working — without relying on internal tribal knowledge.

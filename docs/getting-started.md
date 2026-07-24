@@ -139,20 +139,21 @@ Minimum post-flash validation checklist:
 
 ## Running An Example
 
-**Status: not started.** There is no `examples/` directory in this repository yet — this is the single biggest gap between the current documentation baseline and a complete SDK. Until it exists, use the [Hardware Interfaces](#hardware-interfaces) commands below directly on a booted device as a manual smoke test.
+Device-verified examples are available in [../examples/](../examples/README.md):
 
-When the first official example is added, it should be:
+- [CAN round-trip](../examples/can.md) — Rexgen pipe and SocketCAN, send and receive
+- [Sensor channels](../examples/sensor-channels.md) — Accelerometer, Gyroscope, Analog (ADC), Digital input
+- [GNSS](../examples/gnss.md) — parsed fixes and raw NMEA UART
 
-- small and deterministic (e.g. a `candump`/`cansend` round-trip, or a `gpioset`/`gpioget` toggle) so it's easy to validate pass/fail
-- buildable with the application SDK from [Building The Application SDK](#building-the-application-sdk) above, not just runnable from the base image
-- clearly connected to a platform capability unique to Rexgen Smart (CAN, GPIO, GNSS, or the Rexgen Core socket interface), not a generic "hello world"
+Each example is a manual, shell-level walkthrough (real commands and real captured output) rather than a compiled application — they're the fastest way to confirm a booted device's interfaces are working before writing your own application against them.
 
 ## Hardware Interfaces
 
-The baseline image ships the userspace tooling to reach the platform interfaces out of the box:
+The baseline image ships the userspace tooling to reach the platform interfaces out of the box; see [Running An Example](#running-an-example) above for verified, working walkthroughs of each:
 
-- **CAN**: SocketCAN via `can-utils`/`iproute2` (`ip link set can0 up type can bitrate 500000`, `candump can0`, `cansend can0 123#DEADBEEF`).
-- **GPIO**: `libgpiod`/`libgpiod-tools` (`gpiodetect`, `gpioget`, `gpioset`).
-- **GNSS**: onboard GNSS data logging is a documented Rexgen device feature.
-- **Rexgen Core / IMU**: reached through the Rexgen Core integration path (`rexgen-core`, `rexgend`, `wlan-manager`) over the USB link — see [hardware-architecture.md](hardware-architecture.md). Live CAN, socket control ports (5051/5053/5054) and datalog upload to cloud storage are part of this path.
+- **CAN**: Rexgen named pipe (`/var/run/rexgen/can0/tx`+`rx`) or standard SocketCAN (`can-utils`/`iproute2`: `candump can0`, `cansend can0 123#DEADBEEF`).
+- **Accelerometer / Gyroscope**: Rexgen named pipes (`/var/run/rexgen/acc/rx`, `/var/run/rexgen/gyro/rx`), enabled via RexDesk.
+- **Analog / Digital channels**: Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`).
+- **GNSS**: `/opt/influx/gnssdata_start.sh` to init, then `/var/run/rexgen/gnss/rx` (parsed) or `/dev/ttymxc1` (raw NMEA).
+- **Rexgen Core**: reached through the same pipe interface and the socket control ports (5051/5053/5054) over the USB link — see [hardware-architecture.md](hardware-architecture.md).
 - **Flashing and recovery**: see [flashing.md](flashing.md).

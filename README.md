@@ -41,7 +41,7 @@ Always state both when reporting an issue or describing a build.
 - supported platform integration flows
 - supported hardware, branch and release scope defined by release documentation (see [SUPPORT.md](SUPPORT.md))
 
-Official runnable SDK examples are planned but not yet published — see [Current Scope](#current-scope).
+See [examples/](examples/README.md) for device-verified CAN, IMU/ADC/Digital, and GNSS examples.
 
 ## Not Supported
 
@@ -88,7 +88,7 @@ Status of each SDK area:
 | Support and security policies | Done, pending a real security-contact address — see [SECURITY.md](SECURITY.md) |
 | Release notes | Done for the platform baseline; no SDK-specific tag cut yet — see [RELEASE_NOTES.md](RELEASE_NOTES.md) |
 | Formal EULA/license text | Interim short-form notice only, pending legal review — see [EULA.md](EULA.md) |
-| Official SDK examples | **Not started** — no `examples/` directory exists yet in this repo |
+| Official SDK examples | Done for CAN, IMU/ADC/Digital channels, and GNSS — see [examples/](examples/README.md) |
 
 ## Getting Started
 
@@ -110,6 +110,7 @@ Quick links:
 - [Getting Started](docs/getting-started.md)
 - [Flashing Guide](docs/flashing.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Examples](examples/README.md)
 
 ## Build Configuration
 
@@ -163,23 +164,25 @@ See [docs/getting-started.md](docs/getting-started.md) for the full flow.
 
 ## Hardware Interfaces
 
-The practical developer value of Rexgen Smart is the platform interfaces exposed to Linux-side software. The baseline image already ships the userspace tooling for:
+The practical developer value of Rexgen Smart is the platform interfaces exposed to Linux-side software. Device-verified, working examples exist for all of these — see [examples/](examples/README.md):
 
-- **CAN** — SocketCAN, via `can-utils` and `iproute2` (`ip link set can0 up type can bitrate ...`, `candump`, `cansend`).
-- **GPIO** — via `libgpiod` / `libgpiod-tools` (`gpiodetect`, `gpioget`, `gpioset`).
-- **GNSS** — onboard GNSS data logging support (Rexgen device feature).
-- **Rexgen Core / IMU data** — exposed through the Rexgen Core integration path (`rexgen-core`, `rexgend`) over the USB link described in [docs/hardware-architecture.md](docs/hardware-architecture.md); live CAN, socket control ports (5051/5053/5054) and datalog upload are part of this path.
+- **CAN** — two interchangeable paths: the Rexgen named pipe (`/var/run/rexgen/can0/tx`+`rx`) and standard SocketCAN (`cansend`/`candump`, `can-utils`). See [examples/can.md](examples/can.md).
+- **Accelerometer / Gyroscope (IMU)** — Rexgen named pipes (`/var/run/rexgen/acc/rx`, `/var/run/rexgen/gyro/rx`), enabled via RexDesk channel configuration. See [examples/sensor-channels.md](examples/sensor-channels.md).
+- **Analog (ADC) / Digital input channels** — Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`). See [examples/sensor-channels.md](examples/sensor-channels.md).
+- **GNSS** — parsed fixes via `/var/run/rexgen/gnss/rx`, or raw NMEA 0183 straight off the module's UART (`/dev/ttymxc1`), after `/opt/influx/gnssdata_start.sh`. See [examples/gnss.md](examples/gnss.md).
+- **Rexgen Core** — reached through the same pipe interface and the socket control ports (5051/5053/5054) over the USB link described in [docs/hardware-architecture.md](docs/hardware-architecture.md).
 - **Flashing/recovery** — over USB using NXP's UUU tool; see [docs/flashing.md](docs/flashing.md).
 
 Exact API/wrapper boundaries for the Rexgen Core interfaces are not yet published as a versioned reference; this section is the current source of truth until a dedicated API reference exists.
 
 ## Repository Status
 
-The documentation baseline (build flow, manifest sync, flashing, application SDK, hardware interfaces) is complete and usable end-to-end. Remaining known gaps before calling this a finished v1.0 SDK: official runnable examples, a real security-contact address, and formal legal review of the EULA — see the table in [Current Scope](#current-scope).
+The documentation baseline (build flow, manifest sync, flashing, application SDK, hardware interfaces, examples) is complete and usable end-to-end. Remaining known gap before calling this a finished v1.0 SDK: formal legal review of the EULA — see the table in [Current Scope](#current-scope).
 
 ## Documentation
 
 - `manifest/README.md`
+- `examples/README.md`
 - `docs/overview.md`
 - `docs/host-setup.md`
 - `docs/hardware-architecture.md`
@@ -193,7 +196,7 @@ The documentation baseline (build flow, manifest sync, flashing, application SDK
 
 ## Development Direction
 
-The current approach is to evolve the existing Yocto-based project into a usable first SDK release with minimal structural changes. Done: developer onboarding, build/flash/application-SDK documentation, release hygiene (manifest mirroring, versioning model). Remaining: official examples, safer release defaults (see [SECURITY.md](SECURITY.md) development-vs-release posture, still to be validated against the actual image).
+The current approach is to evolve the existing Yocto-based project into a usable first SDK release with minimal structural changes. Done: developer onboarding, build/flash/application-SDK documentation, hardware-interface examples, release hygiene (manifest mirroring, versioning model). Remaining: safer release defaults (see [SECURITY.md](SECURITY.md) development-vs-release posture).
 
 ## License And Versioning
 
