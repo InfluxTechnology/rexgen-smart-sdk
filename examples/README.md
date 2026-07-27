@@ -1,23 +1,48 @@
 # Examples
 
-Working, device-verified examples for reading and writing Rexgen Smart data from Linux userspace. Each example was captured on a real `imx8mm-smart` unit (`REX18-A1-B003`) over a serial console.
+`rexgend` bridges the Rexgen Core logger (over USB) to Linux user-space and exposes the live bus/sensor data through **two parallel mechanisms**:
 
-| Example | What it covers |
-|---|---|
-| [can.md](can.md) | Sending and receiving CAN frames, two ways: the Rexgen named-pipe interface and standard Linux SocketCAN (`cansend`/`candump`) |
-| [sensor-channels.md](sensor-channels.md) | Reading Accelerometer, Gyroscope, Analog (ADC), and Digital input channels; enabling channels with RexDesk |
-| [gnss.md](gnss.md) | Reading parsed GNSS fixes and raw NMEA UART output |
+1. **Named pipes (FIFOs)** — human-readable text, under `/var/run/rexgen/`. See [named-pipes/](named-pipes/README.md).
+2. **SocketCAN (vcan)** — standard Linux virtual CAN interfaces (`can0`..`can3`), usable with `candump`/`cansend` and any SocketCAN program. See [socketcan/](socketcan/README.md).
 
-## Common Pattern: The Rexgen Pipe Interface
+Both are active at the same time when SocketCAN is enabled: a CAN frame from the device shows up **both** in the `canN/rx` pipe **and** on the `canN` vcan socket, and a frame you send through **either** path is transmitted by the device. This is verified on real hardware in both folders' "Verified On Real Hardware" sections.
 
-Most of these examples read from named pipes under `/var/run/rexgen/<channel>/rx` (and, for CAN, write to `/var/run/rexgen/<channel>/tx`). Each line is timestamped:
+Sensors (GNSS, accelerometer, gyroscope, digital inputs, ADC) are **named pipes only** — there is no SocketCAN equivalent for them.
+
+## Layout
 
 ```text
-(<timestamp>) <field or channel index> <value>
+named-pipes/                     socketcan/
+├── README.md   (full spec)      ├── README.md   (full spec)
+├── bash/       *.sh             ├── bash/        *.sh   (candump / cansend)
+├── python/     *.py             ├── python/      *.py   (stdlib socket)
+└── nodejs/     *.js             └── nodejs/      *.js   (npm: socketcan)
+images/                          (screenshots referenced by both READMEs)
 ```
 
-`<timestamp>` is a monotonically increasing counter (microseconds since some device-internal epoch, not wall-clock time) — use it to order/deduplicate samples, not to derive real-world time.
+| Task        | Named pipes                        | SocketCAN                         |
+|-------------|-------------------------------------|-----------------------------------|
+| read CAN    | `can_read.{sh,py,js}`              | `can_read.{sh,py,js}`             |
+| send CAN    | `can_send.{sh,py,js}`              | `can_send.{sh,py,js}`             |
+| read GNSS   | `gnss_read.{sh,py,js}`             | — (pipes only)                    |
+| read GPIO / digital in | `gpio_read.{sh,py,js}` (reusable for acc/gyro/adc) | — (pipes only) |
 
-## Enabling Channels
+## Quick Start
 
-Before a `/var/run/rexgen/<channel>/rx` pipe produces data, the corresponding channel must be enabled on the device. This is done from **RexDesk** (`Configuration` panel → `Channels` / `Logging`), not from the Linux shell — see [sensor-channels.md](sensor-channels.md#enabling-channels-with-rexdesk) and [can.md](can.md#configuring-the-can-bus-with-rexdesk) for the exact screens.
+Run on the device as `root` (`/var/run/rexgen` and the CAN interfaces are root-owned):
+
+```sh
+# Bash
+sh named-pipes/bash/can_read.sh   can0
+sh socketcan/bash/can_read.sh     can0        # needs can-utils
+
+# Python (stdlib only)
+python3 named-pipes/python/can_read.py   can0
+python3 socketcan/python/can_read.py     can0
+
+# Node.js
+node named-pipes/nodejs/can_read.js   can0
+cd socketcan/nodejs && npm install && node can_read.js can0   # needs the socketcan pkg
+```
+
+See [named-pipes/README.md](named-pipes/README.md) and [socketcan/README.md](socketcan/README.md) for the complete specification: pipe/interface paths, text and binary frame formats, GNSS channel list, error frames, `use_socketcan` configuration, and known gotchas.

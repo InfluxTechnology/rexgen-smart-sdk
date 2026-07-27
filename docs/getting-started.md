@@ -139,21 +139,20 @@ Minimum post-flash validation checklist:
 
 ## Running An Example
 
-Device-verified examples are available in [../examples/](../examples/README.md):
+Device-verified examples, with runnable Bash/Python/Node.js code, are available in [../examples/](../examples/README.md):
 
-- [CAN round-trip](../examples/can.md) — Rexgen pipe and SocketCAN, send and receive
-- [Sensor channels](../examples/sensor-channels.md) — Accelerometer, Gyroscope, Analog (ADC), Digital input
-- [GNSS](../examples/gnss.md) — parsed fixes and raw NMEA UART
+- [Named pipes](../examples/named-pipes/README.md) — CAN (read/send), GNSS, digital/accelerometer/gyroscope/ADC channels, all as plain-text FIFOs under `/var/run/rexgen/`
+- [SocketCAN](../examples/socketcan/README.md) — the same CAN traffic via standard Linux `vcan` interfaces (`cansend`/`candump`, `python-can`-style raw sockets, the `socketcan` npm package)
 
-Each example is a manual, shell-level walkthrough (real commands and real captured output) rather than a compiled application — they're the fastest way to confirm a booted device's interfaces are working before writing your own application against them.
+Each example folder includes a full protocol/API reference plus working code in all three languages — the fastest way to confirm a booted device's interfaces are working before writing your own application against them.
 
 ## Hardware Interfaces
 
 The baseline image ships the userspace tooling to reach the platform interfaces out of the box; see [Running An Example](#running-an-example) above for verified, working walkthroughs of each:
 
-- **CAN**: Rexgen named pipe (`/var/run/rexgen/can0/tx`+`rx`) or standard SocketCAN (`can-utils`/`iproute2`: `candump can0`, `cansend can0 123#DEADBEEF`).
+- **CAN**: Rexgen named pipe (`/var/run/rexgen/canN/{rx,tx,err}`) or standard SocketCAN `vcan` interface (`candump can0`, `cansend can0 123#DEADBEEF`) — both active at once, toggled via `use_socketcan` in `/data/rexgen/config/rexgend.conf`.
 - **Accelerometer / Gyroscope**: Rexgen named pipes (`/var/run/rexgen/acc/rx`, `/var/run/rexgen/gyro/rx`), enabled via RexDesk.
-- **Analog / Digital channels**: Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`).
+- **Analog / Digital channels**: Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`); digital input is read-only.
 - **GNSS**: `/opt/influx/gnssdata_start.sh` to init, then `/var/run/rexgen/gnss/rx` (parsed) or `/dev/ttymxc1` (raw NMEA).
 - **Rexgen Core**: reached through the same pipe interface and the socket control ports (5051/5053/5054) over the USB link — see [hardware-architecture.md](hardware-architecture.md).
 - **Flashing and recovery**: see [flashing.md](flashing.md).

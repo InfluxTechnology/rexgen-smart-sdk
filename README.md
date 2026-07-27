@@ -166,14 +166,14 @@ See [docs/getting-started.md](docs/getting-started.md) for the full flow.
 
 The practical developer value of Rexgen Smart is the platform interfaces exposed to Linux-side software. Device-verified, working examples exist for all of these — see [examples/](examples/README.md):
 
-- **CAN** — two interchangeable paths: the Rexgen named pipe (`/var/run/rexgen/can0/tx`+`rx`) and standard SocketCAN (`cansend`/`candump`, `can-utils`). See [examples/can.md](examples/can.md).
-- **Accelerometer / Gyroscope (IMU)** — Rexgen named pipes (`/var/run/rexgen/acc/rx`, `/var/run/rexgen/gyro/rx`), enabled via RexDesk channel configuration. See [examples/sensor-channels.md](examples/sensor-channels.md).
-- **Analog (ADC) / Digital input channels** — Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`). See [examples/sensor-channels.md](examples/sensor-channels.md).
-- **GNSS** — parsed fixes via `/var/run/rexgen/gnss/rx`, or raw NMEA 0183 straight off the module's UART (`/dev/ttymxc1`), after `/opt/influx/gnssdata_start.sh`. See [examples/gnss.md](examples/gnss.md).
+- **CAN** — two interchangeable views of the same bus, bridged by `rexgend`: the Rexgen named pipe (`/var/run/rexgen/canN/{rx,tx,err}`) and a standard Linux SocketCAN `vcan` interface (`can0`..`can3`, usable with `cansend`/`candump`). Toggled via `use_socketcan` in `/data/rexgen/config/rexgend.conf`. See [examples/named-pipes/](examples/named-pipes/README.md) and [examples/socketcan/](examples/socketcan/README.md).
+- **Accelerometer / Gyroscope (IMU)** — Rexgen named pipes (`/var/run/rexgen/acc/rx`, `/var/run/rexgen/gyro/rx`), enabled via RexDesk channel configuration. See [examples/named-pipes/](examples/named-pipes/README.md).
+- **Analog (ADC) / Digital input channels** — Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`); digital input is read-only, there is no GPIO-output path through `rexgend`. See [examples/named-pipes/](examples/named-pipes/README.md).
+- **GNSS** — parsed fixes via `/var/run/rexgen/gnss/rx`, or raw NMEA 0183 straight off the module's UART (`/dev/ttymxc1`), after `/opt/influx/gnssdata_start.sh`. See [examples/named-pipes/](examples/named-pipes/README.md).
 - **Rexgen Core** — reached through the same pipe interface and the socket control ports (5051/5053/5054) over the USB link described in [docs/hardware-architecture.md](docs/hardware-architecture.md).
 - **Flashing/recovery** — over USB using NXP's UUU tool; see [docs/flashing.md](docs/flashing.md).
 
-Exact API/wrapper boundaries for the Rexgen Core interfaces are not yet published as a versioned reference; this section is the current source of truth until a dedicated API reference exists.
+The `rexgend` data-path protocol (pipe and SocketCAN frame/text formats) is fully specified in [examples/named-pipes/README.md](examples/named-pipes/README.md) and [examples/socketcan/README.md](examples/socketcan/README.md). There is no packaged client library on top of it yet — applications talk to the pipes/sockets directly, as shown in the example code.
 
 ## Repository Status
 

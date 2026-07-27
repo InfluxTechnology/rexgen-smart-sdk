@@ -54,7 +54,7 @@ This entry describes the `influx-6.6.23` platform baseline the SDK currently wra
 ### Known Limitations
 
 - No dedicated SDK version tag yet — this baseline is tracked via the manifest files under [`manifest/`](manifest/README.md) (mirrored from `influx-yocto-base`'s `influx-6.6.23` branch), not as a separate SDK release artifact
-- Public API/wrapper boundary for Rexgen Core interfaces is still being documented (see [README.md](README.md#hardware-interfaces))
+- The `rexgend` data-path protocol (named pipes and SocketCAN, for CAN/GNSS/IMU/ADC/digital channels) is documented and exampled in [examples/](examples/README.md); a packaged client library/wrapper on top of it does not exist yet — applications talk to the pipes/sockets directly
 - `populate_sdk` (application SDK / cross-toolchain) output has not yet been published as a standalone downloadable artifact — build it locally per [docs/getting-started.md](docs/getting-started.md#building-the-application-sdk)
 - **`influx-image-base` ships insecure default credentials (passwordless `tester` user, hardcoded `root` password, SSH enabled by default) — see [SECURITY.md](SECURITY.md#current-credential-posture-influx-image-base) before deploying any built image outside a lab environment**
 
