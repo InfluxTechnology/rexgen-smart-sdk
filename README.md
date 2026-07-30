@@ -1,5 +1,7 @@
 # Rexgen Smart SDK
 
+[![Lint examples & manifest](https://github.com/InfluxTechnology/rexgen-smart-sdk/actions/workflows/lint-examples.yml/badge.svg)](https://github.com/InfluxTechnology/rexgen-smart-sdk/actions/workflows/lint-examples.yml)
+
 `Rexgen Smart SDK` is the official development package for building Linux-side software on Rexgen Smart devices. It provides the documented build flow, platform integration path and example starting points needed to build images, flash devices and develop applications on the i.MX8 Linux host.
 
 This repository is the single entry point for Rexgen Smart Linux development: source sync, build, flash, application SDK, and hardware-interface documentation on top of the existing Yocto-based platform flow.
