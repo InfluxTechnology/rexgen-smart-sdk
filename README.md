@@ -85,8 +85,8 @@ Status of each SDK area:
 | Manifest / source sync | Done — [manifest/](manifest/README.md) |
 | Flashing guide | Done — [docs/flashing.md](docs/flashing.md) |
 | Supported hardware list | Done — `imx8mm-smart` only, see [SUPPORT.md](SUPPORT.md) |
-| Support and security policies | Done, pending a real security-contact address — see [SECURITY.md](SECURITY.md) |
-| Release notes | Done for the platform baseline; no SDK-specific tag cut yet — see [RELEASE_NOTES.md](RELEASE_NOTES.md) |
+| Support and security policies | Done — real reporting contact (`security@influxtechnology.com`) in [SECURITY.md](SECURITY.md) |
+| Release notes | Done — first SDK tag `v0.1.0` cut, see [RELEASE_NOTES.md](RELEASE_NOTES.md) |
 | Formal EULA/license text | Interim short-form notice only, pending legal review — see [EULA.md](EULA.md) |
 | Official SDK examples | Done for CAN, IMU/ADC/Digital channels, and GNSS — see [examples/](examples/README.md) |
 
