@@ -43,6 +43,6 @@ To stay within supported scope:
 
 ## Getting Help
 
-- **Bugs and questions about this SDK** (documentation, manifest, build/flash flow): open a GitHub issue in this repository.
+- **Bugs and questions about this SDK** (documentation, manifest, build/flash flow): open a GitHub issue in this repository, using the bug report or documentation issue template. See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to submit a fix yourself.
 - **Security issues**: do not open a public issue — see [SECURITY.md](SECURITY.md) for the reporting contact.
 - **Partner and commercial support**: use your existing InfluxTechnology account/partner contact.

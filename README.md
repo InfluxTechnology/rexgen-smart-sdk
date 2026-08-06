@@ -195,6 +195,7 @@ The documentation baseline (build flow, manifest sync, flashing, application SDK
 - `SUPPORT.md`
 - `SECURITY.md`
 - `EULA.md`
+- `CONTRIBUTING.md`
 
 ## Development Direction
 
