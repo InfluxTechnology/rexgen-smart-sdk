@@ -190,6 +190,7 @@ The documentation baseline (build flow, manifest sync, flashing, application SDK
 - `docs/hardware-architecture.md`
 - `docs/getting-started.md`
 - `docs/flashing.md`
+- `docs/mender-ota.md`
 - `docs/troubleshooting.md`
 - `RELEASE_NOTES.md`
 - `SUPPORT.md`
