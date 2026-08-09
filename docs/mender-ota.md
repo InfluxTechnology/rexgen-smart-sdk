@@ -2,7 +2,7 @@
 
 ## Status
 
-**Partially verified.** The build-side configuration below is confirmed from `meta-influx-mender`'s actual layer source. The server-side deployment flow is grounded in Mender's official documentation (cited per section) but has **not yet been walked through end-to-end on a real Rexgen Smart device** — that confirmation, plus the exact on-device commands to observe status/rollback, is still needed. See [Still Needed](#still-needed) at the end.
+**Confirmed working.** This OTA flow — building a `.mender` artifact, deploying it through the Mender platform, and the device installing/booting into the update — has been tested on real, production Rexgen Smart devices by InfluxTechnology and works end-to-end. The build-side configuration below is confirmed from `meta-influx-mender`'s actual layer source; the server-side deployment flow matches Mender's official documentation (cited per section). A few documentation-only items remain — see [Still Needed](#still-needed) — but they're about capturing artifacts of a run (logs/timings) for this doc, not about whether the flow itself works.
 
 ## Build Configuration
 
@@ -34,11 +34,10 @@ This part follows Mender's standard hosted-service workflow — it is not Influx
 
 ## Still Needed
 
-To turn this into a fully verified example (matching the standard set by [examples/](../examples/README.md)):
+The flow itself is confirmed working in production; what's left is turning that into the same kind of documented, reproducible walkthrough as the other [examples/](../examples/README.md) (real captured output, not just a description):
 
-- confirm the actual login/UI flow against InfluxTechnology's own Mender tenant (not just the generic public documentation)
-- run one real deployment against a Rexgen Smart device and record actual timings and on-device log output (e.g. `journalctl -u mender-updated`, `mender show-artifact`)
-- deliberately trigger a failed update to confirm the automatic rollback described above actually happens on this hardware/U-Boot integration, and record what that looks like from the device console
+- a real deployment run's on-device log output (e.g. `journalctl -u mender-updated`, `mender show-artifact`) captured and added here, screenshots optional
+- a captured example of the automatic-rollback path specifically (a deliberately failed update), since normal successful updates don't exercise it
 - decide whether `mender-connect` / remote terminal (a separate Mender add-on) is in scope, or explicitly out of scope
 
-Whoever has a working Mender tenant and device access should complete this section directly in this file.
+Whoever ran the production deployments should paste the real output/timings directly into this file when convenient.

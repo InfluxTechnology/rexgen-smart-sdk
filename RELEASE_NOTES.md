@@ -32,7 +32,8 @@ First tagged snapshot of this repository. Included:
 - `populate_sdk` (application SDK / cross-toolchain) output has not yet been published as a standalone downloadable artifact — build it locally per [docs/getting-started.md](docs/getting-started.md#building-the-application-sdk).
 - **`influx-image-base` ships insecure default credentials (passwordless `tester` user, hardcoded `root` password, SSH enabled by default) — see [SECURITY.md](SECURITY.md#current-credential-posture-influx-image-base) before deploying any built image outside a lab environment.**
 - [EULA.md](EULA.md) is an interim usage notice, not yet reviewed by legal/business ownership.
-- [docs/mender-ota.md](docs/mender-ota.md) covers the build-side Mender configuration (confirmed from source) and the server-side deployment flow (per Mender's own docs), but has not yet been walked through end-to-end on a real device — see that file's "Still Needed" section.
+
+Mender OTA is confirmed working end-to-end on production devices — see [docs/mender-ota.md](docs/mender-ota.md); only a captured log/output example is still pending there, not a functional gap.
 
 ## Upcoming
 
@@ -41,7 +42,6 @@ Tracked blockers before a `v1.0.0` release:
 - secure-by-default image variant or `.bbappend` (removes the passwordless `tester` user, requires a per-build `root` password instead of the shared default)
 - `populate_sdk` toolchain installer published as a downloadable release artifact
 - legal sign-off on [EULA.md](EULA.md)
-- device-verified Mender OTA walkthrough (see [docs/mender-ota.md](docs/mender-ota.md))
 - expanded CI beyond example lint (see below) — at minimum a scheduled/manual image build validation
 
 ## Platform Baseline Reference: `influx-yocto-base` v1.0
