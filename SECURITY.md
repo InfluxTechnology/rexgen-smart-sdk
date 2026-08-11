@@ -38,6 +38,10 @@ This is a **lab/bench development default**, not a release-security posture. As 
 
 **Do not deploy an unmodified build of this image to any customer-facing, internet-reachable, or otherwise untrusted-network device.**
 
+## Possible Shared HTTPS Key (ReXgen Netservices Dashboard)
+
+`/opt/influx/netservices/ssl/ca.crt`/`ca.key`, used by the on-device WiFi/network management dashboard for its optional HTTPS mode (see [docs/wifi-cellular.md](docs/wifi-cellular.md#security-note)), have an on-disk modification timestamp (`2018-03-09`) that does not match the inspected device's actual provisioning date — indicating this CA private key likely ships baked into every image rather than being generated per-device. **Not yet confirmed across multiple units.** If confirmed, this is the same class of issue as the credentials above: a private key extracted from one device (or from the image itself) would let someone impersonate the dashboard's HTTPS identity fleet-wide. Until confirmed and fixed, avoid enabling the dashboard's `https_enabled` setting, or generate a unique certificate per device first.
+
 ## Hardening Checklist Before Non-Lab Deployment
 
 Before flashing a device for anything beyond bench development, apply all of the following:
@@ -46,7 +50,8 @@ Before flashing a device for anything beyond bench development, apply all of the
 2. Set a unique `root` password per device/fleet (not the shared default), or disable root login entirely (`PermitRootLogin no` in the SSH server config) in favor of a named, key-authenticated user.
 3. Restrict `ssh-server-openssh` to key-based authentication (`PasswordAuthentication no`) for release images, or disable it entirely if remote shell access is not required.
 4. Regenerate any credentials before the device leaves a trusted network — never rely on the baseline SDK image's credentials past initial bring-up.
-5. Track this checklist per fleet/deployment; a device that skipped step 1–3 should not be treated as production-ready regardless of its build date.
+5. Leave the ReXgen Netservices Dashboard's `https_enabled` setting off until the shared-CA-key question above is confirmed and resolved, or generate/install a unique certificate per device first.
+6. Track this checklist per fleet/deployment; a device that skipped any step above should not be treated as production-ready regardless of its build date.
 
 ## Scope
 

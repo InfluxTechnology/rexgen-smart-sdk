@@ -112,6 +112,7 @@ Quick links:
 - [Getting Started](docs/getting-started.md)
 - [Flashing Guide](docs/flashing.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [WiFi And Cellular](docs/wifi-cellular.md)
 - [Examples](examples/README.md)
 
 ## Build Configuration
@@ -173,6 +174,7 @@ The practical developer value of Rexgen Smart is the platform interfaces exposed
 - **Analog (ADC) / Digital input channels** — Rexgen named pipes (`/var/run/rexgen/adc/rx`, `/var/run/rexgen/dig/rx`); digital input is read-only, there is no GPIO-output path through `rexgend`. See [examples/named-pipes/](examples/named-pipes/README.md).
 - **GNSS** — parsed fixes via `/var/run/rexgen/gnss/rx`, or raw NMEA 0183 straight off the module's UART (`/dev/ttymxc1`), after `/opt/influx/gnssdata_start.sh`. See [examples/named-pipes/](examples/named-pipes/README.md).
 - **Rexgen Core** — reached through the same pipe interface and the socket control ports (5051/5053/5054) over the USB link described in [docs/hardware-architecture.md](docs/hardware-architecture.md).
+- **WiFi (AP + client) and cellular (LTE)** — WiFi AP (`wlan1`, `hostapd`+`dnsmasq`) and client (`wlan0`, `wpa_supplicant`), a Quectel EC25 modem (`ppp0`), and automatic WiFi/cellular failover, primarily configured through the on-device ReXgen Netservices Dashboard. See [docs/wifi-cellular.md](docs/wifi-cellular.md).
 - **Flashing/recovery** — over USB using NXP's UUU tool; see [docs/flashing.md](docs/flashing.md).
 
 The `rexgend` data-path protocol (pipe and SocketCAN frame/text formats) is fully specified in [examples/named-pipes/README.md](examples/named-pipes/README.md) and [examples/socketcan/README.md](examples/socketcan/README.md). There is no packaged client library on top of it yet — applications talk to the pipes/sockets directly, as shown in the example code.
@@ -191,6 +193,7 @@ The documentation baseline (build flow, manifest sync, flashing, application SDK
 - `docs/getting-started.md`
 - `docs/flashing.md`
 - `docs/mender-ota.md`
+- `docs/wifi-cellular.md`
 - `docs/troubleshooting.md`
 - `RELEASE_NOTES.md`
 - `SUPPORT.md`
