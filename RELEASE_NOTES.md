@@ -28,7 +28,7 @@ First tagged snapshot of this repository. Included:
 
 ### Known Limitations
 
-- The `rexgend` data-path protocol (named pipes and SocketCAN, for CAN/GNSS/IMU/ADC/digital channels) is documented and exampled in [examples/](examples/README.md); a packaged client library/wrapper on top of it does not exist yet — applications talk to the pipes/sockets directly.
+- The `rexgend` data-path protocol (named pipes and SocketCAN, for CAN/GNSS/IMU/ADC/digital channels) is documented and exampled in [examples/](examples/README.md). **By decision, no packaged client library/wrapper will be built on top of it** — applications are expected to talk to the pipes/sockets directly, as shown in the example code.
 - `populate_sdk` (application SDK / cross-toolchain) output has not yet been published as a standalone downloadable artifact — build it locally per [docs/getting-started.md](docs/getting-started.md#building-the-application-sdk).
 - **`influx-image-base` ships insecure default credentials (passwordless `tester` user, hardcoded `root` password, SSH enabled by default) — see [SECURITY.md](SECURITY.md#current-credential-posture-influx-image-base) before deploying any built image outside a lab environment.**
 - [EULA.md](EULA.md) is an interim usage notice, not yet reviewed by legal/business ownership.

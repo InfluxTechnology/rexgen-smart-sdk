@@ -177,7 +177,7 @@ The practical developer value of Rexgen Smart is the platform interfaces exposed
 - **WiFi (AP + client) and cellular (LTE)** — WiFi AP (`wlan1`, `hostapd`+`dnsmasq`) and client (`wlan0`, `wpa_supplicant`), a Quectel EC25 modem (`ppp0`), and automatic WiFi/cellular failover, primarily configured through the on-device ReXgen Netservices Dashboard. See [docs/wifi-cellular.md](docs/wifi-cellular.md).
 - **Flashing/recovery** — over USB using NXP's UUU tool; see [docs/flashing.md](docs/flashing.md).
 
-The `rexgend` data-path protocol (pipe and SocketCAN frame/text formats) is fully specified in [examples/named-pipes/README.md](examples/named-pipes/README.md) and [examples/socketcan/README.md](examples/socketcan/README.md). There is no packaged client library on top of it yet — applications talk to the pipes/sockets directly, as shown in the example code.
+The `rexgend` data-path protocol (pipe and SocketCAN frame/text formats) is fully specified in [examples/named-pipes/README.md](examples/named-pipes/README.md) and [examples/socketcan/README.md](examples/socketcan/README.md). By decision, no packaged client library will be built on top of it — applications talk to the pipes/sockets directly, as shown in the example code.
 
 ## Repository Status
 
