@@ -53,7 +53,15 @@ Official Yocto Project `5.0.6` (`Scarthgap`) minimums, quoted from the system re
 
 Stable network connectivity is also required for the initial `repo sync` (it fetches every layer in `manifest/`) and for any `bitbake` fetch tasks that aren't already in `downloads/` or `sstate-cache`.
 
-A full from-scratch `influx-image-base` build has not been benchmarked and published for a reference host yet — if you time one, add the wall-clock time and host spec here for future readers.
+A full from-scratch `influx-image-base` build has not been benchmarked and published for a reference host yet. Until a first-party measurement exists, the table below gives **estimated ranges** for common host specs, positioned against published third-party Yocto build-time benchmarks for comparable (not identical) images — these are not measurements of `influx-image-base` itself, and should be replaced with a real number as soon as one is available.
+
+| Host spec | Estimated range | Based on |
+|---|---|---|
+| Core i7 (7th gen), 32 GB RAM, 1 TB SSD | ~1.5–2.5 hours | [sveinse/yocto-benchmark](https://github.com/sveinse/yocto-benchmark): i7-7820HQ, 8 cores, 32 GB, NVMe → 34 min on a much smaller test image; [djboni/yocto-benchmark](https://github.com/djboni/yocto-benchmark): 8–12 core / 32 GB / SSD hosts → 1h25–2h02 building `core-image-minimal` + SDK |
+| Core i7 (9th gen), 64 GB RAM, 1 TB SSD | ~1.5–2 hours | djboni: 8-core / 64 GB / NVMe class → 1h46 (`core-image-minimal` + SDK); extra RAM beyond ~16–32 GB is rarely the bottleneck |
+| 2× Xeon E5-2620 v2, 1 TB SSD | ~2–3.5 hours | djboni: 12-core / 32 GB / SSD (newer, higher-clock chip) → 1h25; same-generation reference (2× Xeon E5-2670 v2, more cores/higher clock) → 19 min on the smaller sveinse test image — an older, lower-clock dual-Xeon like the E5-2620 v2 should land well above these |
+
+`influx-image-base` is heavier than the `core-image-minimal`/small test images these benchmarks used (it adds Qt6, Wayland, Bluetooth, wireless firmware/drivers, and Mender), so real times likely sit at the upper end of these ranges or above. If you time a real build, replace this table with the actual measurement (host spec + wall-clock time) — real data beats estimates.
 
 ## Locale
 
